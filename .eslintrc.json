@@ -1,4 +1,3 @@
-
 {
     "env": {
         "browser": true,
@@ -37,7 +36,12 @@
         "react/jsx-filename-extension": "off",
         "no-shadow": "off",
         "@typescript-eslint/no-shadow": ["error"],
-        "import/no-cycle": "off"
+        "import/no-cycle": "off",
+        "jsx-a11y/label-has-for": [ "error", {
+            "required": {
+            "some": [ "nesting", "id"  ]
+            }
+      }]
     },
     "settings": {
         "import/resolver": {

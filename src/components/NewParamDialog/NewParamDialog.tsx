@@ -4,10 +4,10 @@ import { NewParamDialogInterface } from "./NewParamDialog.props";
 
 import styles from "./NewParamDialog.module.css";
 
-export const NewParamDialog = ({
+export function NewParamDialog({
   visible,
   addField,
-}: NewParamDialogInterface): JSX.Element => {
+}: NewParamDialogInterface): JSX.Element {
   const [description, setDescription] = useState("");
 
   const handleClick = () => {
@@ -16,19 +16,24 @@ export const NewParamDialog = ({
 
   return (
     <div
-      className={classnames(styles.form, {
+      className={classnames(styles.popup, {
         [styles.visible]: visible,
       })}
     >
-      <label htmlFor="newDescriptionParamField"></label>
+      <label htmlFor="newDescriptionParamField" className={styles.inputLabel}> 
+        <span className={styles.labelText}>Название параметра продукта</span>
       <input
         type="text"
-        name="newDescriptionParamField"
+        id="newDescriptionParamField"
         placeholder="Цена со скидкой"
-        value={description}
+          value={description}
+           className={styles.inputText}
         onChange={(e) => setDescription(e.target.value)}
-      />
-      <button onClick={handleClick}>Добавить</button>
+        />
+        </label>
+      <button type="button"  className={styles.button} onClick={handleClick}>
+        Добавить
+      </button>
     </div>
   );
-};
+}

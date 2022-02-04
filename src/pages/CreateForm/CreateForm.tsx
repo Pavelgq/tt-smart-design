@@ -1,9 +1,9 @@
 import { ProductCreateForm } from "../../components/ProductCreateForm/ProductCreateForm";
 
-export const CreateForm = (): JSX.Element => {
+export function CreateForm(): JSX.Element {
   return (
-    <div>
+    <div className="container">
       <ProductCreateForm />
     </div>
   );
-};
+}

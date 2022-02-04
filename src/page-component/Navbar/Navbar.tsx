@@ -1,30 +1,35 @@
+import cn from "classnames";
 import { Link, useLocation } from "react-router-dom";
+
+import styles from "./Navbar.module.css";
 
 const links = [
   {
-    path: "",
+    path: "/",
     title: "Список продуктов",
   },
   {
-    path: "add",
+    path: "/add",
     title: "Создать продукт",
   },
 ];
 
-export const Navbar = (): JSX.Element => {
+export function Navbar(): JSX.Element {
   const location = useLocation();
-
+  console.log(location.pathname);
   return (
-    <nav>
+    <nav className={styles.nav}>
       {links.map((link) => (
         <Link
           key={link.title}
-          to={`/${link.path}`}
-          defaultChecked={location.pathname == link.path}
+          className={cn(styles.link, {
+            [styles.activeLink]: location.pathname === link.path,
+          })}
+          to={`${link.path}`}
         >
           {link.title}
         </Link>
       ))}
     </nav>
   );
-};
+}

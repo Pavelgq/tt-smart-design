@@ -1,0 +1,26 @@
+.nav {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--gray);
+}
+
+.link {
+  margin: 0 5px;
+  padding: 10px;
+  border-radius: 25px;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.link:hover {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+.activeLink,
+.activeLink:hover {
+  background-color: var(--secondary);
+  color: var(--white);
+}
