@@ -9,7 +9,9 @@ body {
   --gray: #eeeeee;
   --secondary: #92dce5;
   --primary: #52dee5;
+  --primary-hover: #2abcc4;
   --text: #455963;
+  --error: #d14a4a;
 }
 
 .container {

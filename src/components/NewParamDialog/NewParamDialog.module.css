@@ -1,12 +1,38 @@
 .popup {
+  position: absolute;
+  width: 300px;
+  left: calc(50vw - 150px);
+  top: 20vh;
   display: flex;
   flex-direction: column;
-  margin: 20px;
   padding: 20px;
   background-color: var(--gray);
+  border-radius: 10px;
 }
 
 
+.popupWrapper {
+  display: none;
+  position: fixed;
+  width:100%;
+  height:100%;
+  top: 0;
+  left: 0;
+  justify-content:center;
+  align-items:center;
+  background:rgba(0, 0, 0, .7);
+}
+
+.visible {
+  display: flex;
+}
+
+.button {
+  margin-bottom: 10px;
+}
+.button:last-child {
+  margin-bottom: 0;
+}
 
 .labelText {
   
@@ -14,4 +40,8 @@
 
 .inputText {
 
+}
+
+.errorMessage {
+  margin-bottom: 10px;
 }

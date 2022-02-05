@@ -1,0 +1,37 @@
+.button {
+  display: inline-block;
+
+  box-sizing: border-box;
+  padding: 10px;
+
+  cursor: pointer;
+
+  transition: all 0.2s;
+  text-align: center;
+
+  border: none;
+
+  border-radius: 5px;
+
+  font-size: 14px;
+}
+
+.contained {
+  color: var(--white);
+  background-color: var(--primary);
+}
+
+.contained:hover {
+  background-color: var(--primary-hover);
+}
+
+.outlined {
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  background-color: var(--white);
+}
+
+.outlined:hover {
+  color: var(--white);
+  background-color: var(--primary);
+}

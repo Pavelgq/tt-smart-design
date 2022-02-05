@@ -5,6 +5,7 @@ import { Loading } from "../Loading/Loading";
 import { NewParamDialog } from "../NewParamDialog/NewParamDialog";
 
 import { InputText } from "../InputText/InputText";
+import { Button } from "../Button/Button";
 
 export interface ParamI {
   title: string;
@@ -115,12 +116,18 @@ export function ProductCreateForm(): JSX.Element {
             </div>
           ))}
         </fieldset>
-        <button type="button" onClick={handleOpenDialog}>
+        <Button type="button" onClick={handleOpenDialog} variant="contained">
           Добавить поле
-        </button>
-        <button type="submit">Отправить</button>
+        </Button>
+        <Button type="submit" variant="contained">
+          Отправить
+        </Button>
       </form>
-      <NewParamDialog visible={visible} addField={handleAddField} />
+      <NewParamDialog
+        visible={visible}
+        setVisible={setVisible}
+        addField={handleAddField}
+      />
       {response && <p>{response}</p>}
       {error && <p>{error}</p>}
     </section>

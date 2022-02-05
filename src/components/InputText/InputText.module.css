@@ -8,13 +8,14 @@
   outline-color: var(--primary);
 
   background: var(--white);
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.10);
 
   font-size: 16px;
   line-height: 22px;
 }
 
 .input::placeholder {
+  font-size: 14px;
   color: #A4A4A4;
 }
 
@@ -25,5 +26,6 @@
 }
 
 .labelText {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  color: var(--black);
 }
