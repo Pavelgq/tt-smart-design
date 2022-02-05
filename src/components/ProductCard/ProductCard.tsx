@@ -15,12 +15,15 @@ export function ProductCard({
       <p className={styles.description}>{description}</p>
 
       <ul className={styles.list}>
-        {params.map((p) => (
-          <li key={p.title} className={styles.item}>
-            <h3 className={styles.paramTitle}>{p.description}</h3>
-            <span className={styles.paramValue}>{p.value}</span>
-          </li>
-        ))}
+        {params.map(
+          (p) =>
+            p.value && (
+              <li key={p.title} className={styles.item}>
+                <h3 className={styles.paramTitle}>{p.description}</h3>
+                <span className={styles.paramValue}>{p.value}</span>
+              </li>
+            )
+        )}
       </ul>
     </div>
   );

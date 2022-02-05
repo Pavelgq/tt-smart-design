@@ -1,5 +1,20 @@
 const mongoose = require("mongoose");
 
+const paramSchema = new mongoose.Schema({
+  title: {
+    type: String,
+  },
+  description: {
+    type: String,
+  },
+  value: {
+    type: String,
+  },
+  require: Boolean,
+});
+
+const paramModel = mongoose.model("param", paramSchema, "param");
+
 const productSchema = new mongoose.Schema(
   {
     title: {
@@ -9,9 +24,7 @@ const productSchema = new mongoose.Schema(
     description: {
       type: String,
     },
-    params: {
-      type: Object,
-    },
+    params: [paramSchema],
   },
   {
     timestamps: true,
@@ -20,4 +33,4 @@ const productSchema = new mongoose.Schema(
 
 const productModel = mongoose.model("product", productSchema, "product");
 
-module.exports = productModel;
+module.exports = { productModel, paramModel };

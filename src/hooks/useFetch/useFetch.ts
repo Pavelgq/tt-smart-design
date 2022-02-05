@@ -35,7 +35,6 @@ const useFetch = (): FetchInterface => {
     };
     axios(baseUrl + options.url, requestOptions)
       .then((res) => {
-        console.log(res);
         if (!skipAfterDestroy) {
           setResponse(res.data);
           setIsLoading(false);
