@@ -3,6 +3,7 @@ import { useState } from "react";
 import { NewParamDialogInterface } from "./NewParamDialog.props";
 
 import styles from "./NewParamDialog.module.css";
+import { InputText } from "../InputText/InputText";
 
 export function NewParamDialog({
   visible,
@@ -20,18 +21,16 @@ export function NewParamDialog({
         [styles.visible]: visible,
       })}
     >
-      <label htmlFor="newDescriptionParamField" className={styles.inputLabel}> 
-        <span className={styles.labelText}>Название параметра продукта</span>
-      <input
+      <InputText
+        labelTitle="Название параметра продукта"
         type="text"
         id="newDescriptionParamField"
         placeholder="Цена со скидкой"
-          value={description}
-           className={styles.inputText}
+        value={description}
+        className={styles.inputText}
         onChange={(e) => setDescription(e.target.value)}
-        />
-        </label>
-      <button type="button"  className={styles.button} onClick={handleClick}>
+      />
+      <button type="button" className={styles.button} onClick={handleClick}>
         Добавить
       </button>
     </div>

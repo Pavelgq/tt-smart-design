@@ -5,7 +5,7 @@ import { CreateForm } from "./pages/CreateForm/CreateForm";
 import { NotFound } from "./pages/NotFound/NotFound";
 import { Products } from "./pages/Products/Products";
 
-export const RoutesList = (): JSX.Element => {
+export function RoutesList(): JSX.Element {
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>
@@ -15,4 +15,4 @@ export const RoutesList = (): JSX.Element => {
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
-};
+}

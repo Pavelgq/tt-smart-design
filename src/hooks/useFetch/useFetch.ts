@@ -13,7 +13,7 @@ const useFetch = (): FetchInterface => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [response, setResponse] = useState<JSON>();
   const [error, setError] = useState(null);
-  const [options, setOptions] = useState<AxiosRequestConfig>();
+  const [options, setOptions] = useState<AxiosRequestConfig>({});
 
   const doFetch = useCallback((fetchOptions: AxiosRequestConfig = {}) => {
     setOptions(fetchOptions);
@@ -23,7 +23,7 @@ const useFetch = (): FetchInterface => {
   useEffect(() => {
     let skipAfterDestroy = false;
     if (!isLoading) {
-      return;
+      return () => false;
     }
     const requestOptions = {
       ...options,
@@ -31,7 +31,7 @@ const useFetch = (): FetchInterface => {
         "Content-Type": "application/json",
       },
     };
-    axios(baseUrl + options?.url, requestOptions)
+    axios(baseUrl + options.url, requestOptions)
       .then((res) => {
         console.log(res);
         if (!skipAfterDestroy) {

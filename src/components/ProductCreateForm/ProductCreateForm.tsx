@@ -4,6 +4,8 @@ import { ProductI } from "../../interfaces/Product.interface";
 import { Loading } from "../Loading/Loading";
 import { NewParamDialog } from "../NewParamDialog/NewParamDialog";
 
+import { InputText } from "../InputText/InputText";
+
 export interface ParamI {
   title: string;
   description: string;
@@ -23,7 +25,7 @@ const params: ParamI[] = [
   },
 ];
 
-export const ProductCreateForm = (): JSX.Element => {
+export function ProductCreateForm(): JSX.Element {
   const [productTitle, setProductTitle] = useState("");
   const [productDescription, setProductDescription] = useState("");
   const [productParams, setProductParams] = useState(params);
@@ -80,18 +82,20 @@ export const ProductCreateForm = (): JSX.Element => {
     <section>
       <form onSubmit={handleSubmit}>
         <fieldset>
-          <label htmlFor="title">Название:</label>
-          <input
+          <div>
+            <InputText
+              labelTitle="Название"
+              type="text"
+              id="title"
+              placeholder="Введите название"
+              value={productTitle}
+              onChange={(e) => setProductTitle(e.target.value)}
+            />
+          </div>
+          <InputText
+            labelTitle="Описание"
             type="text"
-            name="title"
-            placeholder="Введите название"
-            value={productTitle}
-            onChange={(e) => setProductTitle(e.target.value)}
-          />
-          <label htmlFor="description">Описание:</label>
-          <input
-            type="text"
-            name="description"
+            id="description"
             placeholder="Введите описание"
             value={productDescription}
             onChange={(e) => setProductDescription(e.target.value)}
@@ -100,10 +104,10 @@ export const ProductCreateForm = (): JSX.Element => {
         <fieldset>
           {productParams.map((param, index) => (
             <div key={param.title}>
-              <label htmlFor={param.title}>{param.description}:</label>
-              <input
+              <InputText
+                labelTitle={param.description}
                 type="text"
-                name={param.title}
+                id={param.title}
                 value={param.value}
                 placeholder="Введите данные"
                 onChange={(e) => handleChangeParams(e, param, index)}
@@ -121,4 +125,4 @@ export const ProductCreateForm = (): JSX.Element => {
       {error && <p>{error}</p>}
     </section>
   );
-};
+}

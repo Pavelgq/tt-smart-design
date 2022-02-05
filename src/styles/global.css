@@ -1,21 +1,14 @@
 body {
-
-  font-family: "DM Sans", 'Lucida Sans',
-    'Lucida Sans Regular',
-    'Lucida Grande',
-    'Lucida Sans Unicode',
-    Geneva,
-    Verdana,
-    sans-serif;
-
+  font-family: "DM Sans", "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
 :root {
-  --black: #383D3B;
+  --black: #383d3b;
   --white: #fff;
-  --gray: #7C7C7C;
-  --secondary: #92DCE5;
-  --primary: #52DEE5;
+  --gray: #eeeeee;
+  --secondary: #92dce5;
+  --primary: #52dee5;
   --text: #455963;
 }
 

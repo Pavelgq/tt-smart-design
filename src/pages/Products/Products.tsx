@@ -1,3 +1,3 @@
-export const Products = (): JSX.Element => {
+export function Products(): JSX.Element {
   return <div>Products</div>;
-};
+}
