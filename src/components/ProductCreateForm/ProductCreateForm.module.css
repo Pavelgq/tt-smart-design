@@ -1,0 +1,21 @@
+.field {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.inputText {
+  margin-right: 15px;
+}
+.inputText:last-child {
+  margin-right: 0;
+} 
+
+.button {
+  margin-right: 10px;
+}
+
+.button:last-child {
+  margin-right: 0;
+}

@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 interface FetchInterface {
   isLoading: boolean;
   response: any;
-  error: Error | null;
+  error: string;
   doFetch: (fetchOptions?: AxiosRequestConfig) => void;
 }
 
@@ -12,16 +12,18 @@ const useFetch = (): FetchInterface => {
   const baseUrl = process.env.BASE_URL || "http://localhost:8080/api/v1";
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [response, setResponse] = useState<JSON>();
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
   const [options, setOptions] = useState<AxiosRequestConfig>({});
 
   const doFetch = useCallback((fetchOptions: AxiosRequestConfig = {}) => {
+    setError('');
     setOptions(fetchOptions);
     setIsLoading(true);
   }, []);
 
   useEffect(() => {
     let skipAfterDestroy = false;
+    
     if (!isLoading) {
       return () => false;
     }
@@ -41,8 +43,10 @@ const useFetch = (): FetchInterface => {
       })
       .catch((resError) => {
         // Todo: What if this error is 4**
+        console.log(skipAfterDestroy, resError);
         if (!skipAfterDestroy) {
-          setError(resError.response.data);
+          console.error(resError || new Error('Серверная ошибка'))
+          setError('Сервер не отвечает');
           setIsLoading(false);
         }
       });

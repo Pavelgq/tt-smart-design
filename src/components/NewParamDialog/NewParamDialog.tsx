@@ -43,7 +43,7 @@ export function NewParamDialog({
           labelTitle="Название параметра продукта"
           type="text"
           id="newDescriptionParamField"
-          placeholder="Цена со скидкой"
+          placeholder="Например: Цена со скидкой"
           value={description}
           className={styles.inputText}
           onChange={(e) => setDescription(e.target.value)}

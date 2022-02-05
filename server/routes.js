@@ -16,39 +16,29 @@ productRouter.use((req, res, next) => {
 });
 
 productRouter.get("/all", async (req, res, next) => {
-  //TODO: query params
-  //TODO: filters
+  // TODO: query params
+  // TODO: filters
   try {
-    productModel.find({}, function (err, product) {
+    productModel.find({}, (err, product) => {
       const productMap = {};
-
-      product.forEach(function (product) {
-        productMap[product._id] = product;
+      console.log(product);
+      product.forEach((p) => {
+        productMap[p._id] = p;
       });
-
       res.send(productMap);
     });
-  } catch (error) {}
+  } catch (error) {
+    res.status(400).send(error);
+  }
 });
 
 productRouter.post("/create", async (req, res, next) => {
   try {
     const data = req.body;
-    const filter = "";
-    productModel.updateOne(
-      {
-        filter,
-      },
-      {
-        ...req.body,
-      },
-      function (err, result) {
-        console.log(err);
-      }
-    );
-    res.send("готово");
+    await productModel.create(data);
+    res.send("Продукт успешно создан");
   } catch (error) {
-    console.error(error);
+    res.status(400).send(error);
   }
 });
 

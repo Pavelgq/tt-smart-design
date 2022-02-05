@@ -3,3 +3,10 @@ export interface ProductI {
   description: string;
   params: object;
 }
+
+export interface ProductParamI {
+  title: string;
+  description: string;
+  value: string;
+  require?: boolean;
+}

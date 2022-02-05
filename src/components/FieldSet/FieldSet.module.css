@@ -1,0 +1,12 @@
+.field {
+    background-color:var(--gray);
+    max-width:500px;
+    padding:16px;
+
+    border: 1px solid var(--secondary);
+    border-radius: 5px;
+}
+.legend {
+  margin-bottom: 0px;
+  margin-left: 16px;
+}

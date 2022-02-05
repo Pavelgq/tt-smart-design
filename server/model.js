@@ -4,9 +4,11 @@ const productSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      required: "title is required",
+      required: "Название продукта не задано",
     },
-    description: String,
+    description: {
+      type: String,
+    },
     params: {
       type: Object,
     },
@@ -16,6 +18,6 @@ const productSchema = new mongoose.Schema(
   }
 );
 
-const productModel = mongoose.model("product", productSchema);
+const productModel = mongoose.model("product", productSchema, "product");
 
 module.exports = productModel;

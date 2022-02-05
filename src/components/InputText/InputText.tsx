@@ -9,9 +9,9 @@ export function InputText({
   ...props
 }: InputTextProps): JSX.Element {
   return (
-    <label htmlFor={id} className={styles.inputLabel}>
+    <label htmlFor={id} className={cn(className, styles.inputLabel)}>
       {labelTitle && <span className={styles.labelText}>{labelTitle}:</span>}
-      <input className={cn(className, styles.input)} id={id} {...props} />
+      <input className={styles.input} id={id} {...props} />
     </label>
   );
 }

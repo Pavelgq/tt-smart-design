@@ -1,8 +1,3 @@
-//const client = new MongoClient(url);
-
-const dbName = "myProject";
-
-const { MongoClient } = require(`mongodb`);
 const mongoose = require("mongoose");
 // const mongoURL = process.env.DATABASE_URL;
 const mongoURL = "mongodb://localhost:27017/test";
@@ -18,7 +13,7 @@ const startDB = async () => {
     const db = await mongoose.connection;
 
     db.on("error", console.error);
-    db.once("open", function () {
+    db.once("open", () => {
       console.log("connect");
     });
   } catch (error) {

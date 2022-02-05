@@ -1,28 +1,28 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch/useFetch";
-import { ProductI } from "../../interfaces/Product.interface";
+import { ProductI, ProductParamI } from "../../interfaces/Product.interface";
 import { Loading } from "../Loading/Loading";
 import { NewParamDialog } from "../NewParamDialog/NewParamDialog";
 
 import { InputText } from "../InputText/InputText";
 import { Button } from "../Button/Button";
+import { FieldSet } from "../FieldSet/FieldSet";
 
-export interface ParamI {
-  title: string;
-  description: string;
-  value: string;
-}
+import styles from "./ProductCreateForm.module.css";
+import { ErrorMessage } from "../ErrorMessage/ErrorMessage";
 
-const params: ParamI[] = [
+const params: ProductParamI[] = [
   {
     title: "param_1",
     description: "Цена товара",
     value: "",
+    require: true,
   },
   {
     title: "param_2",
     description: "Цвет товара",
     value: "",
+    require: true,
   },
 ];
 
@@ -30,29 +30,66 @@ export function ProductCreateForm(): JSX.Element {
   const [productTitle, setProductTitle] = useState("");
   const [productDescription, setProductDescription] = useState("");
   const [productParams, setProductParams] = useState(params);
-
+  const [isSubmitSuccess, setIsSubmitSuccess] = useState(false);
+  const [validateMessage, setValidateMessage] = useState("");
   const [visible, setVisible] = useState(false);
 
   const { isLoading, response, error, doFetch } = useFetch();
 
+  const validateForm = (): string => {
+    if (!productTitle) {
+      return "Введите название продукта";
+    }
+    if (!productDescription) {
+      return "Введите описание товара";
+    }
+    const invalidParam = productParams.find((p) => p.require && !p.value);
+    if (invalidParam) {
+      return `Введите значение параметра "${invalidParam.description}"`;
+    }
+
+    return "";
+  };
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const newProduct: ProductI = {
       title: productTitle,
       description: productDescription,
       params: productParams,
     };
+    const message = validateForm();
+    if (message) {
+      setValidateMessage(message);
+      return;
+    }
+    setValidateMessage("");
     doFetch({
       url: "/product/create",
       method: "POST",
       data: newProduct,
-      timeout: 1000,
+      timeout: 5000,
     });
+    setIsSubmitSuccess(false);
   };
+
+  const clearForm = () => {
+    setProductTitle("");
+    setProductDescription("");
+    setProductParams(params);
+  };
+
+  useEffect(() => {
+    if (response && !isSubmitSuccess) {
+      setIsSubmitSuccess(true);
+      clearForm();
+    }
+  }, [response, isSubmitSuccess]);
 
   const handleChangeParams = (
     e: ChangeEvent<HTMLInputElement>,
-    param: ParamI,
+    param: ProductParamI,
     index: number
   ) => {
     const temp = productParams.slice();
@@ -76,24 +113,22 @@ export function ProductCreateForm(): JSX.Element {
     setVisible(!visible);
   };
 
-  if (isLoading) {
-    return <Loading />;
-  }
   return (
     <section>
+      {validateMessage && <ErrorMessage>{validateMessage}</ErrorMessage>}
       <form onSubmit={handleSubmit}>
-        <fieldset>
-          <div>
-            <InputText
-              labelTitle="Название"
-              type="text"
-              id="title"
-              placeholder="Введите название"
-              value={productTitle}
-              onChange={(e) => setProductTitle(e.target.value)}
-            />
-          </div>
+        <FieldSet className={styles.field}>
           <InputText
+            className={styles.inputText}
+            labelTitle="Название"
+            type="text"
+            id="title"
+            placeholder="Введите название"
+            value={productTitle}
+            onChange={(e) => setProductTitle(e.target.value)}
+          />
+          <InputText
+            className={styles.inputText}
             labelTitle="Описание"
             type="text"
             id="description"
@@ -101,25 +136,30 @@ export function ProductCreateForm(): JSX.Element {
             value={productDescription}
             onChange={(e) => setProductDescription(e.target.value)}
           />
-        </fieldset>
-        <fieldset>
+        </FieldSet>
+        <FieldSet className={styles.field}>
           {productParams.map((param, index) => (
-            <div key={param.title}>
-              <InputText
-                labelTitle={param.description}
-                type="text"
-                id={param.title}
-                value={param.value}
-                placeholder="Введите данные"
-                onChange={(e) => handleChangeParams(e, param, index)}
-              />
-            </div>
+            <InputText
+              key={param.title}
+              className={styles.inputText}
+              labelTitle={param.description}
+              type="text"
+              id={param.title}
+              value={param.value}
+              placeholder="Введите данные"
+              onChange={(e) => handleChangeParams(e, param, index)}
+            />
           ))}
-        </fieldset>
-        <Button type="button" onClick={handleOpenDialog} variant="contained">
+        </FieldSet>
+        <Button
+          type="button"
+          className={styles.button}
+          onClick={handleOpenDialog}
+          variant="contained"
+        >
           Добавить поле
         </Button>
-        <Button type="submit" variant="contained">
+        <Button type="submit" className={styles.button} variant="contained">
           Отправить
         </Button>
       </form>
@@ -128,6 +168,7 @@ export function ProductCreateForm(): JSX.Element {
         setVisible={setVisible}
         addField={handleAddField}
       />
+      {isLoading && <Loading />}
       {response && <p>{response}</p>}
       {error && <p>{error}</p>}
     </section>
