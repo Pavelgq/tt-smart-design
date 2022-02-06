@@ -1,6 +1,8 @@
+import { loadavg } from "os";
 import { ChangeEvent, useEffect, useState } from "react";
 import { Button } from "../../components/Button/Button";
 import { InputText } from "../../components/InputText/InputText";
+import { Loading } from "../../components/Loading/Loading";
 import { ProductCard } from "../../components/ProductCard/ProductCard";
 import useFetch from "../../hooks/useFetch/useFetch";
 
@@ -50,7 +52,7 @@ export function Products(): JSX.Element {
   };
 
   return (
-    <>
+    <section className={styles.cardPage}>
       <div className={styles.filtersPanel}>
         <InputText
           className={styles.inputText}
@@ -74,7 +76,7 @@ export function Products(): JSX.Element {
       </div>
       {!isLoading ? (
         <div className={styles.cardList}>
-          {response ? (
+          {response && Object.keys(response.data).length ? (
             Object.keys(response.data).map((productId) => (
               <ProductCard
                 key={productId}
@@ -85,12 +87,12 @@ export function Products(): JSX.Element {
               />
             ))
           ) : (
-            <span>Товаров пока нет</span>
+            <span>Товары не найдены</span>
           )}
         </div>
       ) : (
-        <span>Загрузка</span>
+        <Loading />
       )}
-    </>
+    </section>
   );
 }

@@ -21,7 +21,7 @@ productRouter.get("/all", async (req, res, next) => {
   try {
     const filter = req?.query;
     const isFilters = Object.keys(filter).length !== 0;
-    let newFilter = {};
+    const newFilter = {};
     if (isFilters) {
       if (Object.keys(filter)[0] === "Название") {
         newFilter.title = {
@@ -29,13 +29,15 @@ productRouter.get("/all", async (req, res, next) => {
           $options: "i",
         };
       } else {
-        newFilter = {
-          description: Object.keys(filter)[0],
-          value: {
-            $regex: `(\s+${Object.values(filter)[0]}|^${
-              Object.values(filter)[0]
-            })`,
-            $options: "i",
+        newFilter.params = {
+          $elemMatch: {
+            description: Object.keys(filter)[0],
+            value: {
+              $regex: `(\s+${Object.values(filter)[0]}|^${
+                Object.values(filter)[0]
+              })`,
+              $options: "i",
+            },
           },
         };
       }
