@@ -1,3 +1,35 @@
+## Тестовое задание Smart Design
+
+## Иструкция по установке:
+
+1. Клонируйте репозиторий
+
+### `git clone https://github.com/Pavelgq/tt-smart-design.git`
+
+2. Перейдите в папку проекта
+
+### `cd tt-smart-design`
+
+3. Установите зависимости
+
+### `npm install`
+
+4. Запустить локально базу данных
+
+### `docker run -d -p 27017:27017 mongo`
+
+5. Запустите сервер
+
+### `npm run start-server`
+
+6. Собрать клиент
+
+### `npm run build`
+
+## Открыть в браузере `localhost:8080`
+
+===
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -7,7 +7,7 @@ const productRoutes = require(`./routes`);
 
 const app = express();
 
-app.use(express.static(`dist`));
+app.use(express.static(`build`));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
