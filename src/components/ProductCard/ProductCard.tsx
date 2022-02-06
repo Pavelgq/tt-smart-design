@@ -3,6 +3,7 @@ import { ProductCardProps } from "./ProductCard.props";
 import styles from "./ProductCard.module.css";
 
 export function ProductCard({
+  id,
   title,
   description,
   params,
@@ -11,6 +12,10 @@ export function ProductCard({
 }: ProductCardProps): JSX.Element {
   return (
     <div className={cn(styles.card, className)}>
+      <p className={styles.productId}>
+        <span>id: </span>
+        <span>{id}</span>
+      </p>
       <h1 className={styles.title}>{title}</h1>
       <p className={styles.description}>{description}</p>
 

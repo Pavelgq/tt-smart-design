@@ -80,6 +80,7 @@ export function Products(): JSX.Element {
             Object.keys(response.data).map((productId) => (
               <ProductCard
                 key={productId}
+                id={productId}
                 className={styles.card}
                 title={response.data[productId].title}
                 description={response.data[productId].description}
